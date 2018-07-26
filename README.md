@@ -15,6 +15,6 @@ biocLite("karyoploteR")
 
 ## Usage
 ```
-Rscript gene_plotter.R chrZ reference.txt orthlist.txt
+Rscript gene_plotter.R ChrZ Length_Silkbase.Sheet1.tsv tblastx_HitTable_THlisted_trimABC_orthlist.txt
 ```
 
