@@ -40,24 +40,24 @@ values(granges) <- genes[setdiff(colnames(genes), c("SB_chr", "SB_start", "SB_en
 
 pdf("test_plot.pdf", width = 20.0, height = 4.6)
 kp <- plotKaryotype(genome = custom.genome, plot.type=4, cex = 1.5, chromosomes=selected_chr)
-#kpAddBaseNumbers(kp, tick.dist = 10000000, tick.len = 10, tick.col="red", cex=1,
-#                 minor.tick.dist = 1000000, minor.tick.len = 5, minor.tick.col = "gray")
+kpAddBaseNumbers(kp, tick.dist = 1000000, tick.len = 10, tick.col="red", cex=0.8,
+                 minor.tick.dist = 100000, minor.tick.len = 5, minor.tick.col = "gray")
 
 kpAddLabels(kp, "MetaData",
             label.margin = 0.1,
-            srt=90, pos=3, cex=0.8,
+            srt=90, cex=0.8,
             data.panel=1)
 kpAddLabels(kp, "SB_ID",
-            r0=0, r1=0.3, cex=0.6,
+            r0=0.3, r1=0.31, cex=0.7,
             data.panel=1)
 kpAddLabels(kp, "TRINITY_ID",
-            r0=0.6, r1=0.8, cex=0.6,
+            r0=0.6, r1=0.8, cex=0.7,
             data.panel=1)
 kpAddLabels(kp, "bitscore",
-            r0=0.875, r1=0.9, cex=0.6,
+            r0=0.92, r1=0.95, cex=0.7,
             data.panel=1)
 kpAddLabels(kp, "evalue",
-            r0=0.975, r1=1.0, cex=0.6,
+            r0=1.02, r1=1.05, cex=0.7,
             data.panel=1)
 
 #marker <- paste(granges$SB_ID, names(granges), granges$bitscore, granges$evalue, sep = "\t")
@@ -109,8 +109,8 @@ kpPlotMarkers(kp,
 dev.off()
 png("test_plot.png", width = 1500, height = 370)
 kp <- plotKaryotype(genome = custom.genome, plot.type=4, cex = 1.5, chromosomes=selected_chr)
-#kpAddBaseNumbers(kp, tick.dist = 10000000, tick.len = 10, tick.col="red", cex=1,
-#                 minor.tick.dist = 1000000, minor.tick.len = 5, minor.tick.col = "gray")
+kpAddBaseNumbers(kp, tick.dist = 1000000, tick.len = 10, tick.col="red", cex=0.8,
+                 minor.tick.dist = 100000, minor.tick.len = 5, minor.tick.col = "gray")
 
 kpAddLabels(kp, "MetaData",
             label.margin = 0.1,
