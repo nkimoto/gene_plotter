@@ -18,16 +18,18 @@ end <- c()
 for (i in strsplit(ref, "\\.\\.")){end_tmp <- append(end_tmp, i[2])}
 for (i in strsplit(end_tmp, " \\(")){end <- append(end, i[1])}
 end <- as.integer(end)
+print(chr)
 custom.genome <- toGRanges(data.frame(chr, start, end))
 
 ## Write Genes
 genes <- read.table(annotation, header = TRUE, sep = "\t", row.names = 1)
 genes["SB_chr"] <- sapply(strsplit(as.character(genes[["SB_chr"]]), "_"), function(x){x[2]})
-genes[["SB_chr"]] <- sub("Chr1", "ChrZ", genes[["SB_chr"]])
+genes[["SB_chr"]] <- sub("Chr1$", "ChrZ", genes[["SB_chr"]])
 
 Trinity_ID <- rownames(genes)
 SB_start <- genes[["SB_start"]]
 SB_end <- genes[["SB_end"]]
+print(genes[["SB_chr"]])
 gene.symbols <- c(Trinity_ID)
 granges <- makeGRangesFromDataFrame(genes,
 #                                    seqinfo=seqinfo(custom.genome),
@@ -38,7 +40,7 @@ values(granges) <- genes[setdiff(colnames(genes), c("SB_chr", "SB_start", "SB_en
 
 
 
-pdf("test_plot.pdf", width = 20.0, height = 4.6)
+pdf(paste0(selected_chr, ".pdf"), width = 20.0, height = 4.6)
 kp <- plotKaryotype(genome = custom.genome, plot.type=4, cex = 1.5, chromosomes=selected_chr)
 kpAddBaseNumbers(kp, tick.dist = 1000000, tick.len = 10, tick.col="red", cex=0.8,
                  minor.tick.dist = 100000, minor.tick.len = 5, minor.tick.col = "gray")
@@ -107,7 +109,7 @@ kpPlotMarkers(kp,
               label.dist = 0,
               data.panel=1)
 dev.off()
-png("test_plot.png", width = 1500, height = 370)
+png(paste0(selected_chr, ".png"), width = 1500, height = 370)
 kp <- plotKaryotype(genome = custom.genome, plot.type=4, cex = 1.5, chromosomes=selected_chr)
 kpAddBaseNumbers(kp, tick.dist = 1000000, tick.len = 10, tick.col="red", cex=0.8,
                  minor.tick.dist = 100000, minor.tick.len = 5, minor.tick.col = "gray")
